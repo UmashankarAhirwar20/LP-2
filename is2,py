@@ -1,0 +1,32 @@
+import math
+
+plaintext = "transposition technique using python"
+key = 8
+ciphertext = [''] * key
+
+for column in range(key):
+    pointer = column
+    while pointer < len(plaintext):
+        ciphertext[column] += plaintext[pointer]
+        pointer += key
+
+cipher = ' '.join(ciphertext)
+print(cipher)
+
+nC = math.ceil(len(cipher) / key)
+print(nC)
+nR = key
+numOfShadedBoxes = (nC * nR) - len(cipher)
+
+pt = [''] * nC
+col = 0
+row = 0
+
+for sym in cipher:
+    pt[col] += sym
+    col += 1
+    if (col == nC) or (col == nC - 1 and row >= nR - numOfShadedBoxes):
+        col = 0
+        row += 1
+
+print(''.join(pt))
